@@ -8,3 +8,4 @@ workflows:
     jobs:
       - maven/test:
           command: 'package'
+          context: udacity
