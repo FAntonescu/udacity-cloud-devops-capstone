@@ -4,9 +4,10 @@ orbs:
   docker: circleci/docker@1.5.0
   aws-eks: circleci/aws-eks@1.0.3
   kubernetes: circleci/kubernetes@0.11.2
+  anchore-engine: anchore/anchore-engine@1.0.0
 
 jobs:
-  build:
+  maven_build:
     docker:
       - image: circleci/openjdk:stretch
     steps:
@@ -28,11 +29,11 @@ jobs:
 workflows:
   build:
     jobs:
-      - build
+      - maven_build
       - docker/hadolint:
           trusted-registries: docker.io
           requires:
-            - build
+            - maven_build
       - docker/publish:
           attach-at: './'
           image: ${DOCKER_LOGIN}/udacity-cloud-devops-spring-petclinic
@@ -49,6 +50,12 @@ workflows:
           resource-name: deployment/petclinic
           record: true
           show-kubectl-command: true
-          watch-timeout: 1m
+          watch-timeout: 5m
           requires:
             - "docker/publish"
+      - anchore/image_scan:
+          image_name: "${DOCKER_LOGIN}/udacity-cloud-devops-spring-petclinic:1.0.0-b${CIRCLE_BUILD_NUM}"
+          timeout: '600'
+          requires:
+            - "docker/publish"
+
