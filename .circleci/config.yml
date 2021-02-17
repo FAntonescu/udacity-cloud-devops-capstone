@@ -4,7 +4,7 @@ orbs:
   docker: circleci/docker@1.5.0
   aws-eks: circleci/aws-eks@1.0.3
   kubernetes: circleci/kubernetes@0.11.2
-  anchore-engine: anchore/anchore-engine@1.0.0
+  anchore: anchore/anchore-engine@1.0.0
 
 jobs:
   maven_build:
