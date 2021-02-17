@@ -36,7 +36,7 @@ workflows:
             - maven_build
       - docker/publish:
           attach-at: './'
-          image: docker.io/${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic
+          image: ${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic
           tag: 1.0.0-b${CIRCLE_WORKFLOW_ID}
           context: udacity
           requires:
