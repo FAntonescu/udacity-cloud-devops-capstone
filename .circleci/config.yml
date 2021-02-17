@@ -17,4 +17,4 @@ workflows:
           tag: 1.0.0-b${CIRCLE_BUILD_NUM}
           context: udacity
           requires:
-            docker/hadolint
+            - docker/hadolint
