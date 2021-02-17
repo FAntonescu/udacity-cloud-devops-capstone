@@ -4,7 +4,6 @@ orbs:
   docker: circleci/docker@1.5.0
   aws-eks: circleci/aws-eks@1.0.3
   kubernetes: circleci/kubernetes@0.11.2
-  anchore: anchore/anchore-engine@1.0.0
 
 jobs:
   maven_build:
@@ -51,10 +50,5 @@ workflows:
           record: true
           show-kubectl-command: true
           watch-timeout: 5m
-          requires:
-            - "docker/publish"
-      - anchore/image_scan:
-          image_name: "docker.io/${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic:1.0.0-b${CIRCLE_WORKFLOW_ID}"
-          timeout: '600'
           requires:
             - "docker/publish"
