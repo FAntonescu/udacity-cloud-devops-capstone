@@ -58,4 +58,3 @@ workflows:
           timeout: '600'
           requires:
             - "docker/publish"
-
