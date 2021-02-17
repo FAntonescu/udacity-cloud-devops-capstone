@@ -36,7 +36,7 @@ workflows:
             - maven_build
       - docker/publish:
           attach-at: './'
-          image: ${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic
+          image: docker.io/${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic
           tag: 1.0.0-b${CIRCLE_BUILD_NUM}
           context: udacity
           requires:
@@ -44,7 +44,7 @@ workflows:
       - aws-eks/update-container-image:
           aws-region: eu-west-1
           cluster-name: udacity
-          container-image-updates: petclinic=${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic:1.0.0-b${CIRCLE_BUILD_NUM}
+          container-image-updates: petclinic=docker.io/${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic:1.0.0-b${CIRCLE_BUILD_NUM}
           get-rollout-status: true
           namespace: petclinic
           resource-name: deployment/petclinic
@@ -54,7 +54,7 @@ workflows:
           requires:
             - "docker/publish"
       - anchore/image_scan:
-          image_name: "${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic:1.0.0-b${CIRCLE_BUILD_NUM}"
+          image_name: "docker.io/${DOCKERHUB_USER}/udacity-cloud-devops-spring-petclinic:1.0.0-b${CIRCLE_BUILD_NUM}"
           timeout: '600'
           requires:
             - "docker/publish"
