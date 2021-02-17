@@ -19,7 +19,7 @@ spec:
         app: petclinic
     spec:
       containers:
-      - image: fnan/udacity-cloud-devops-spring-petclinic:1.0.0-b30
+      - image: docker.io/fnan/udacity-cloud-devops-spring-petclinic:1.0.0-b30
         name: petclinic
         ports:
         - containerPort: 8080
