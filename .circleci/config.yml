@@ -12,3 +12,6 @@ workflows:
     jobs:
       - docker/hadolint:
           trusted-registries: docker.io
+      - docker/publish:
+          image: ${DOCKER_LOGIN}/udacity-cloud-devops-spring-petclinic:1.0.0-b${CIRCLE_BUILD_NUM}
+          context: udacity
