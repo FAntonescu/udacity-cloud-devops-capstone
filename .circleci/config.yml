@@ -5,13 +5,14 @@ orbs:
   docker: circleci/docker@1.5.0
 
 workflows:
-  maven_test:
+  build:
     jobs:
-      - maven/test
-  lint:
-    jobs:
+      - maven/test:
+          command: package
       - docker/hadolint:
           trusted-registries: docker.io
+          requires:
+            - maven/test
       - docker/publish:
           image: ${DOCKER_LOGIN}/udacity-cloud-devops-spring-petclinic
           tag: 1.0.0-b${CIRCLE_BUILD_NUM}
