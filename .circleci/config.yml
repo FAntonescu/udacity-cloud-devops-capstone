@@ -40,7 +40,7 @@ workflows:
           context: udacity
           requires:
             - docker/hadolint
-      - update-container-image:
+      - aws-eks/update-container-image:
           aws-region: eu-west-1
           cluster-name: udacity
           container-image-updates: "petclinic=${DOCKER_LOGIN}/udacity-cloud-devops-spring-petclinic:1.0.0-b${CIRCLE_BUILD_NUM}"
